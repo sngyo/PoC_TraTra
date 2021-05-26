@@ -1,0 +1,92 @@
+# -----------------------------------------------------------------------------
+# General Parameters
+# -----------------------------------------------------------------------------
+
+# Experiments Name
+name: "exp001-TraTra"  # create savedir
+root_save_dir: "./results/exps/"  # --> directory named exp will be automatically created
+overwrite: False  # remove exps/name directory & reuse same name, better to set False
+seed: 76
+
+# wandb configurations
+off_wandb: False  # to turn off logging wandb
+wdb_proj: "tratra_iam_single_stroke"
+
+
+# -----------------------------------------------------------------------------
+# dataset & preparation
+# -----------------------------------------------------------------------------
+iam_path: "./data/iam_online/"
+iam_xml_path: "./data/iam_online/lineStrokes/"
+iam_unp_path: "./data/iam_online/org_unp/"
+gen_iam_path: "./data/iam_online/gen_iam_256/"
+
+# generate(cropped?) image config
+gen_img_h: 256
+gen_img_w: 256
+
+# pixel size to be blank at each side of the generated image
+# ex.) org 128 * 128, padding(4) --> 120 * 120
+gen_img_pad: 8
+
+# resampling Configuration
+rs_alpha: 0.01
+rs_dist: 3
+rs_max_p: 256
+
+
+# -----------------------------------------------------------------------------
+# training configurations
+# -----------------------------------------------------------------------------
+multi_gpus: False
+multi_gpu_idxs: [0, 2]  # when multi_gpus is True, ignoring --gpu_id argument and use this
+
+# dataloader load from this path
+# TODO: iam
+unp_dir_path: "./data/iam_online/gen_iam_256/resampled_dist3_unp/"  # should be finised with `/`
+exclude_files: "./data/iam_online/gen_iam_256/exclude_single_resampled_dist3.txt"
+
+valid_size: 0.2
+test_size: 0.1
+
+img_h: 32
+img_w: 32
+
+max_output_len: 256  # ==rs_max_p (the output dimension of the TraTra)
+
+save_model: "tratra.pt"  # path will be automatically update
+
+n_losses: 3  # TODO: should be automatically checked
+
+only_first_batch: False  # for debug usage (when True, only first batch will be executed)
+
+
+# -----------------------------------------------------------------------------
+# Hyper Parameters
+# -----------------------------------------------------------------------------
+epochs: 200
+patience: 20
+batch_size: 16
+
+optimizer: "Adam"  # TODO: "SAM"
+lr: 0.00005  # 5e-5
+lr_stepsize: 30
+lr_gamma: 0.5
+
+input_c: 1
+img_enc_dim: 256
+embed_dim: 256
+dropout: 0.3
+img_enc_model: 'UNet'
+nhead: 8
+nhid: 256
+nlayers: 3
+
+
+# -----------------------------------------------------------------------------
+# test configurations
+# -----------------------------------------------------------------------------
+load_model: null  # load model directroy path
+# load_model: "./results/exps/tratra.pt"
+test_data_path: null  # for test.py
+# test_data_path: "./data/iam_online/gen_iam_256/fig/a01/a01-000"

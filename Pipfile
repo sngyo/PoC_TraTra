@@ -1,0 +1,44 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pudb = "*"
+pysen = {extras = ["lint"], version = "==0.9.0"}
+torchinfo = "*"
+line-profiler = "*"
+
+[packages]
+adabelief-pytorch = "==0.1.0"
+easydict = "*"
+fastprogress = "*"
+gdown = "*"
+h5py = "*"
+ipykernel = "*"
+jupyterlab = "*"
+kornia = "==0.3.0"
+matplotlib = "*"
+numpy = "*"
+opencv-python = "*"
+rainbow_logging_handler = "*"
+scikit-image = "*"
+seaborn = "*"
+sklearn = "*"
+torch = "==1.2.0"
+torchvision = "==0.4.0"
+tqdm = "*"
+transformers = "*"
+wandb = "*"
+dsntnn = "*"
+
+[require]
+python_version = "3.7"
+
+[scripts]
+iam_cvt_xml2unp = "python ./src/main.py --cvt_xml2unp --yaml_path ./configs/exp001.yaml"
+iam_gen_single_stroke = "python ./src/main.py --gen_iam_single_stroke_data --yaml_path ./configs/exp001.yaml"
+iam_resampling = "python ./src/main.py --gen_iam_resampled_data --yaml_path ./configs/exp001.yaml"
+iam_train = "python ./src/main.py --train_tratra --yaml_path ./configs/exp001.yaml"
+iam_exclude = "python ./src/main.py --gen_iam_exclude_filename_data --yaml_path ./configs/exp001.yaml"
+iam_test = "python ./src/main.py --test_tratra --yaml_path ./configs/exp001.yaml"
