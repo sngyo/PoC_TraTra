@@ -52,7 +52,7 @@ $ pipenv run iam_test --gpu_id 0
 ![Sample Results](figs/sample_results.png)
 
 ## References
-- [Placeholder] [TraTra Idea Slides]()
+- [Placeholder] [TraTra Idea Slides](figs/TraTra_Ideas.pdf)
 
 
 ## TODOs
